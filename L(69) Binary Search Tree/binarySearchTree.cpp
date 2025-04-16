@@ -166,22 +166,22 @@ int main()
     cout << "Level Order Traversal: " << endl;
     levelOrderTraversal(root);
 
-    // cout << "Searching Data" << endl;
-    // cout << "Enter the data that u want to search: ";
-    // int searchData;
-    // cin >> searchData;
+    cout << "Searching Data" << endl;
+    cout << "Enter the data that u want to search: ";
+    int searchData;
+    cin >> searchData;
 
-    // bool result = search(root, searchData);            // Space Complexity - O(h) Recursive Search
-    // bool result = searchIteratively(root, searchData); // Space Complexity - O(1) Iterative Search
+    bool result = search(root, searchData);            // Space Complexity - O(h) Recursive Search
+    bool result = searchIteratively(root, searchData); // Space Complexity - O(1) Iterative Search
 
-    // if (result)
-    // {
-    //     cout << "It is Present in the BST";
-    // }
-    // else
-    // {
-    //     cout << "It is not present in the BST";
-    // }
+    if (result)
+    {
+        cout << "It is Present in the BST";
+    }
+    else
+    {
+        cout << "It is not present in the BST";
+    }
 
     int minimum = min(root);
     int maximum = max(root);
