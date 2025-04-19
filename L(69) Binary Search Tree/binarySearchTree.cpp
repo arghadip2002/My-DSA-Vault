@@ -156,8 +156,21 @@ bool searchIteratively(node *root, int data)
     return false;
 }
 
-void deleteNode(int data)
+node *deleteFromBST(node *root, int val)
 {
+    if (root == NULL)
+    {
+        return root;
+    }
+
+    if (root->data == val)
+    {
+        // with 0 child
+
+        // with 1 child
+
+        // with 2 child
+    }
 }
 
 int main()
