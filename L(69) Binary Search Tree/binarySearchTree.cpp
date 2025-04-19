@@ -106,25 +106,51 @@ bool search(node *root, int data)
     }
 }
 
-int min(node *root)
+// int min(node *root)
+// {
+//     node *temp = root;
+//     if (temp->left == NULL)
+//     {
+//         return temp->data;
+//     }
+//     else
+//     {
+//         return min(temp->left);
+//     }
+// }
+
+node *min(node *root)
 {
     node *temp = root;
     if (temp->left == NULL)
     {
-        return temp->data;
+        return temp; // Return the address of the minimum node.
     }
     else
     {
-        return min(temp->left);
+        return min(temp->left); // Continue recursion.
     }
 }
 
-int max(node *root)
+// int max(node *root)
+// {
+//     node *temp = root;
+//     if (temp->right == NULL)
+//     {
+//         return temp->data;
+//     }
+//     else
+//     {
+//         return max(temp->right);
+//     }
+// }
+
+node *max(node *root)
 {
     node *temp = root;
     if (temp->right == NULL)
     {
-        return temp->data;
+        return temp;
     }
     else
     {
@@ -166,10 +192,34 @@ node *deleteFromBST(node *root, int val)
     if (root->data == val)
     {
         // with 0 child
+        if (root->right == NULL && root->left == NULL)
+        {
+            delete root;
+            return NULL;
+        }
 
         // with 1 child
+        else if (root->right != NULL && root->left == NULL)
+        {
+            node *temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->left != NULL && root->right == NULL)
+        {
+            node *temp = root->left;
+            delete root;
+            return temp;
+        }
 
         // with 2 child
+        else
+        {
+            int mini = min(root->right)->data;
+            root->data = mini;
+            root->right = deleteFromBST(root->right, mini);
+            return root;
+        }
     }
 
     else if (val > root->data)
@@ -177,16 +227,16 @@ node *deleteFromBST(node *root, int val)
         root->right = deleteFromBST(root->right, val);
     }
     else
-        (val < root->data)
-        {
-            root->left = deleteFromBST(root->left, val);
-        }
+    {
+        root->left = deleteFromBST(root->left, val);
+    }
 }
 
 int main()
 {
     node *root = NULL;
 
+    //  50 20 70 10 30 90 110 -1
     cout << "Entre the Data to Create BST: ";
     takeInput(root);
 
@@ -198,21 +248,30 @@ int main()
     int searchData;
     cin >> searchData;
 
-    bool result = search(root, searchData);            // Space Complexity - O(h) Recursive Search
+    // bool result = search(root, searchData); // Space Complexity - O(h) Recursive Search
     bool result = searchIteratively(root, searchData); // Space Complexity - O(1) Iterative Search
 
     if (result)
     {
-        cout << "It is Present in the BST";
+        cout << "It is Present in the BST" << endl;
     }
     else
     {
-        cout << "It is not present in the BST";
+        cout << "It is not present in the BST" << endl;
     }
 
-    int minimum = min(root);
-    int maximum = max(root);
+    // int minimum = min(root);
+    // int maximum = max(root);
+
+    int minimum = min(root)->data;
+    int maximum = max(root)->data;
 
     cout << "Minimum in BST: " << minimum << endl;
-    cout << "Minimum in BST: " << maximum;
+    cout << "Maximum in BST: " << maximum << endl;
+
+    int nodeDelete;
+    cout << "Enter the Node that u want to delete : ";
+    cin >> nodeDelete;
+    deleteFromBST(root, nodeDelete);
+    levelOrderTraversal(root);
 }
