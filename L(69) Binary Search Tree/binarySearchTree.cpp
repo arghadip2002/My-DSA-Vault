@@ -171,6 +171,16 @@ node *deleteFromBST(node *root, int val)
 
         // with 2 child
     }
+
+    else if (val > root->data)
+    {
+        root->right = deleteFromBST(root->right, val);
+    }
+    else
+        (val < root->data)
+        {
+            root->left = deleteFromBST(root->left, val);
+        }
 }
 
 int main()
