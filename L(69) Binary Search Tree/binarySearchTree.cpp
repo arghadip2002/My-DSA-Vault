@@ -156,6 +156,10 @@ bool searchIteratively(node *root, int data)
     return false;
 }
 
+void deleteNode(int data)
+{
+}
+
 int main()
 {
     node *root = NULL;
